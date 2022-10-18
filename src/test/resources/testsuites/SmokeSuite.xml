@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Smoke Test">
+    <parameter name="browserType" value="chrome"/>
+    <test name="Internal tests" thread-count="2" parallel="classes">
+        <classes>
+            <class name="tests.EntriesTest"></class>
+            <class name="tests.LoginTest"></class>
+            <class name="tests.NavigationTest"></class>
+            <class name="tests.TagsTest"></class>
+        </classes>
+    </test>
+
+</suite>
