@@ -23,7 +23,7 @@ public class TestListeners implements ITestListener {
     @Override
     public void onTestFailure(ITestResult iTestResult) {
         Object currentClass = iTestResult.getInstance();
-        WebDriver driver = (WebDriver) ((BaseTest) currentClass).getDriver();
+        WebDriver driver = ((BaseTest) currentClass).getDriver();
         AllureService allureService = new AllureService();
         allureService.getSystemName();
         allureService.takeScreenshot(driver);

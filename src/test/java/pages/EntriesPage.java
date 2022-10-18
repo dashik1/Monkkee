@@ -5,6 +5,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import java.time.Duration;
@@ -30,6 +31,7 @@ public class EntriesPage {
         return createEntryButton.isEnabled();
     }
 
+    @Step("Create new entry")
     public NewEntryPage clickCreateEntryButton() {
         createEntryButton.click();
         return new NewEntryPage();
@@ -42,6 +44,7 @@ public class EntriesPage {
         return new NewEntryPage();
     }
 
+    @Step("Get number of entries")
     public int getNumberOfEntries() {
         entries.get(1).shouldBe(Condition.enabled, Duration.ofSeconds(10));
         return entries.size();

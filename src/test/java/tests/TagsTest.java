@@ -16,9 +16,8 @@ public class TagsTest extends BaseTest {
     ManageTagsPage manageTagsPage = new ManageTagsPage();
 
 
-    @Test //(retryAnalyzer = RetryAnalyzer.class, priority = 1, description = "User creates new tag")
-    @Description("User creates new tag")
-    public void createNewTagTest() {
+    @Test (retryAnalyzer = RetryAnalyzer.class, priority = 1, description = "User creates new tag")
+        public void createNewTagTest() {
 
         boolean isNewTagCreated = loginPage.login(Credentials.EMAIL, Credentials.PASSWORD)
                 .clickCreateEntryButton()
@@ -29,8 +28,7 @@ public class TagsTest extends BaseTest {
 
     }
 
-    @Test //(retryAnalyzer = RetryAnalyzer.class, priority = 2, description = "User edits existing tag")
-    @Description("User edits existing tag")
+    @Test (retryAnalyzer = RetryAnalyzer.class, priority = 2, description = "User edits existing tag")
     public void editTagTest() {
         String tagNameBeforeEdit =
         loginPage.login(Credentials.EMAIL, Credentials.PASSWORD)
@@ -47,8 +45,7 @@ public class TagsTest extends BaseTest {
 
     }
 
-    @Test //(retryAnalyzer = RetryAnalyzer.class, priority = 1, description = "User deletes tag")
-    @Description("User deletes tag")
+    @Test (retryAnalyzer = RetryAnalyzer.class, priority = 1, description = "User deletes tag")
     public void deleteTagTest() {
         int numberOfTagsBeforeDeletion = loginPage.login(Credentials.EMAIL, Credentials.PASSWORD)
                 .navigateToManageTags()

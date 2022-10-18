@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class ModalWindowLoginPage {
 
@@ -21,7 +22,8 @@ public class ModalWindowLoginPage {
 
     public EntriesPage closeModalWindow() {
         cancelButton.shouldBe(Condition.enabled, Duration.ofSeconds(8));
-        cancelButton.click();
+        executeJavaScript("arguments[0].click();", cancelButton);
+        //cancelButton.click();
         return new EntriesPage();
     }
 }
