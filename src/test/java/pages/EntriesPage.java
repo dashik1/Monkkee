@@ -13,16 +13,12 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class EntriesPage {
     private SelenideElement createEntryButton = $(By.id("create-entry"));
-
     private SelenideElement manageTagsButton = $(By.xpath("//a[text()='Manage tags']"));
     private SelenideElement searchInput = $(By.id("appendedInputButton"));
     private SelenideElement searchButton = $(By.xpath("//button[@type='submit']"));
     private SelenideElement searchResultLabel = $(By.xpath("//div[@class='search-explanation ng-binding']"));
-
     private ElementsCollection entries = $$(By.xpath("//div[@class='entry-container clearfix ng-scope']"));
-
     private ElementsCollection entriesTexts = $$(By.xpath("//div[@class='body ']"));
-
     public boolean isCreateEntryButtonDisplayed() {
         createEntryButton.shouldBe(Condition.enabled, Duration.ofSeconds(10));
         return createEntryButton.isEnabled();
@@ -34,7 +30,6 @@ public class EntriesPage {
         return new NewEntryPage();
     }
 
-
     @Step("Navigate to existing entry")
     public NewEntryPage navigateToEntry() {
         entriesTexts.get(1).click();
@@ -45,7 +40,6 @@ public class EntriesPage {
     public int getNumberOfEntries() {
         entries.get(1).shouldBe(Condition.enabled, Duration.ofSeconds(10));
         return entries.size();
-
     }
 
     @Step("Navigate to Manage Tags")

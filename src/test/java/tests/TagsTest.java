@@ -18,7 +18,8 @@ public class TagsTest extends BaseTest {
     @Test(retryAnalyzer = RetryAnalyzer.class, priority = 1, description = "User creates new tag")
     public void createNewTagTest() {
 
-        boolean isNewTagCreated = loginPage.login(Credentials.EMAIL, Credentials.PASSWORD)
+        boolean isNewTagCreated = loginPage.loginInputCredentials(Credentials.EMAIL, Credentials.PASSWORD)
+                .successfulLogin()
                 .clickCreateEntryButton()
                 .createNewTag()
                 .getAssignedTag();
@@ -29,7 +30,8 @@ public class TagsTest extends BaseTest {
     @Test(retryAnalyzer = RetryAnalyzer.class, priority = 2, description = "User edits existing tag")
     public void editTagTest() {
         String tagNameBeforeEdit =
-                loginPage.login(Credentials.EMAIL, Credentials.PASSWORD)
+                loginPage.loginInputCredentials(Credentials.EMAIL, Credentials.PASSWORD)
+                        .successfulLogin()
                         .navigateToManageTags()
                         .getTagName();
         log.info(String.format("Tag name before editing: %s", tagNameBeforeEdit));
@@ -44,7 +46,8 @@ public class TagsTest extends BaseTest {
 
     @Test(retryAnalyzer = RetryAnalyzer.class, priority = 1, description = "User deletes tag")
     public void deleteTagTest() {
-        int numberOfTagsBeforeDeletion = loginPage.login(Credentials.EMAIL, Credentials.PASSWORD)
+        int numberOfTagsBeforeDeletion = loginPage.loginInputCredentials(Credentials.EMAIL, Credentials.PASSWORD)
+                .successfulLogin()
                 .navigateToManageTags()
                 .getNumberOfTags();
         log.info(String.format("Number of tag before deletion: %s", numberOfTagsBeforeDeletion));

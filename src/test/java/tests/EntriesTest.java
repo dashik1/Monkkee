@@ -20,7 +20,8 @@ public class EntriesTest extends BaseTest {
 
     @Test(retryAnalyzer = RetryAnalyzer.class, priority = 1, description = "User created new entry")
     public void createNewEntryTest() {
-        int numberOfEntriesBeforeCreation = loginPage.login(Credentials.EMAIL, Credentials.PASSWORD)
+        int numberOfEntriesBeforeCreation = loginPage.loginInputCredentials(Credentials.EMAIL, Credentials.PASSWORD)
+                .successfulLogin()
                 .getNumberOfEntries();
         log.info(String.format("Get number of entries before creation: %s", numberOfEntriesBeforeCreation));
         entriesPage.clickCreateEntryButton()
@@ -34,7 +35,8 @@ public class EntriesTest extends BaseTest {
 
     @Test(retryAnalyzer = RetryAnalyzer.class, priority = 2, description = "User edits existing entry")
     public void editEntryTest() {
-        String entryTextBeforeEdit = loginPage.login(Credentials.EMAIL, Credentials.PASSWORD)
+        String entryTextBeforeEdit = loginPage.loginInputCredentials(Credentials.EMAIL, Credentials.PASSWORD)
+                .successfulLogin()
                 .navigateToEntry()
                 .getEntryText();
         log.info(String.format("Get Entry text before editing: %s", entryTextBeforeEdit));
@@ -48,7 +50,8 @@ public class EntriesTest extends BaseTest {
 
     @Test(retryAnalyzer = RetryAnalyzer.class, priority = 1, description = "User deletes entry")
     public void deleteEntryTest() {
-        int numberOfEntriesBeforeDeletion = loginPage.login(Credentials.EMAIL, Credentials.PASSWORD)
+        int numberOfEntriesBeforeDeletion = loginPage.loginInputCredentials(Credentials.EMAIL, Credentials.PASSWORD)
+                .successfulLogin()
                 .getNumberOfEntries();
         log.info(String.format("Get number of entries before deletion: %s", numberOfEntriesBeforeDeletion));
         int numberOfEntriesAfterDeletion = entriesPage.navigateToEntry()
@@ -60,7 +63,8 @@ public class EntriesTest extends BaseTest {
 
     @Test(retryAnalyzer = RetryAnalyzer.class, priority = 2, description = "User search for entry")
     public void searchEntryTest() {
-        boolean isSearchResultDisplayed = loginPage.login(Credentials.EMAIL, Credentials.PASSWORD)
+        boolean isSearchResultDisplayed = loginPage.loginInputCredentials(Credentials.EMAIL, Credentials.PASSWORD)
+                .successfulLogin()
                 .search(FakeMessageGenerator.generateWord())
                 .isSearchResultDisplayed();
         log.info("Search for entries");
