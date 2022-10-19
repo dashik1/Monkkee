@@ -1,7 +1,6 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import constants.Urls;
 import io.qameta.allure.Step;
@@ -12,6 +11,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+
 @Log4j
 public class LoginPage {
     ModalWindowLoginPage modalWindowLoginPage = new ModalWindowLoginPage();
@@ -23,8 +23,8 @@ public class LoginPage {
     private SelenideElement errorMessage = $(By.xpath("//div[@class='alert alert-danger']"));
 
 
-    @Step("Login")
-    public EntriesPage login(String email, String password)  {
+    @Step("Login to the system")
+    public EntriesPage login(String email, String password) {
         open(Urls.LOGIN_URL);
         userInput.sendKeys(email);
         passwordInput.sendKeys(password);
@@ -38,14 +38,12 @@ public class LoginPage {
         if (modalWindowLoginPage.isModalWindowDisplayed()) {
             modalWindowLoginPage.closeModalWindow();
         } else {
-
             return new EntriesPage();
         }
-
-
         return new EntriesPage();
     }
 
+    @Step("Unsuccessful login with wrong password")
     public LoginPage unsuccessfulLogin(String email, String password) {
         open(Urls.LOGIN_URL);
         userInput.sendKeys(email);
@@ -55,16 +53,17 @@ public class LoginPage {
         return this;
     }
 
+    @Step("Navigate to Blog")
     public BlogPage navigateToBlog() {
         blogLabel.click();
         return new BlogPage();
     }
 
+    @Step("Error message is displayed")
     public boolean isErrorMessageDisplayed() {
         log.info("Error message " + errorMessage.getText() + " is displayed");
         return errorMessage.isDisplayed();
 
     }
-
 
 }

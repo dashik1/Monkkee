@@ -11,7 +11,7 @@ import java.io.ByteArrayInputStream;
 public class AllureService {
 
 
-    public  void takeScreenshot(WebDriver driver) {
+    public void takeScreenshot(WebDriver driver) {
         Allure.addAttachment("Any text", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
 
     }

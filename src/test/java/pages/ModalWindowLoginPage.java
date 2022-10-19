@@ -3,12 +3,13 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+
 
 public class ModalWindowLoginPage {
 
@@ -20,10 +21,10 @@ public class ModalWindowLoginPage {
         return modalWindow.isDisplayed();
     }
 
+    @Step("Close modal window")
     public EntriesPage closeModalWindow() {
         cancelButton.shouldBe(Condition.enabled, Duration.ofSeconds(8));
-        executeJavaScript("arguments[0].click();", cancelButton);
-        //cancelButton.click();
+        cancelButton.click();
         return new EntriesPage();
     }
 }
