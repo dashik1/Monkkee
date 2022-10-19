@@ -12,7 +12,6 @@ import static com.codeborne.selenide.Selenide.open;
 @Log4j
 
 public class NavigationTest extends BaseTest {
-
     @Test(retryAnalyzer = RetryAnalyzer.class, priority = 2, description = "User navigates to Blog page")
     public void navigateToBlogTest() {
         LoginPage loginPage = new LoginPage();

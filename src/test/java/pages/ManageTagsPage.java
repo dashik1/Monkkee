@@ -11,11 +11,9 @@ import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.switchTo;
 
 public class ManageTagsPage {
-
     private ElementsCollection editTagButtons = $$(By.xpath("//i[@class='icon-plus icon-white']"));
     private ElementsCollection deleteTagButtons = $$(By.xpath("//i[@class='icon-trash icon-white']"));
     private ElementsCollection tagsNames = $$(By.xpath("//td[@class='tag ng-binding']"));
-
 
     @Step("Click Edit tag button")
     public EditTagPage clickEditTagButton() {
@@ -44,6 +42,5 @@ public class ManageTagsPage {
         switchTo().alert(Duration.ofSeconds(5)).accept();
         return this;
     }
-
 
 }

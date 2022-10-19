@@ -12,7 +12,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 
 public class NewEntryPage {
-
     private SelenideElement entryInput = $(By.id("editable"));
     private SelenideElement savedLabel = $(By.xpath("//span[text()='saved']"));
     private SelenideElement backButton = $(By.id("back-to-overview"));
@@ -22,7 +21,6 @@ public class NewEntryPage {
     private SelenideElement assignedTag = $(By.xpath("//a[@ng-click='untagEntry(assignedTag)']"));
     private SelenideElement entryText = $(By.xpath("//div[@id='editable']//p"));
     private SelenideElement deleteButton = $(By.id("delete-entry"));
-
 
     @Step("Type new entry")
     public NewEntryPage typeNewEntry() {
@@ -58,7 +56,6 @@ public class NewEntryPage {
         return this;
     }
 
-
     @Step("Delete entry")
     public EntriesPage deleteEntry() {
         backButton.shouldBe(Condition.enabled, Duration.ofSeconds(5));
@@ -66,5 +63,4 @@ public class NewEntryPage {
         switchTo().alert(Duration.ofSeconds(5)).accept();
         return new EntriesPage();
     }
-
 }

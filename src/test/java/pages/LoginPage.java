@@ -15,26 +15,28 @@ import static com.codeborne.selenide.Selenide.open;
 @Log4j
 public class LoginPage {
     ModalWindowLoginPage modalWindowLoginPage = new ModalWindowLoginPage();
-
     private SelenideElement userInput = $(By.id("login"));
     private SelenideElement passwordInput = $(By.id("password"));
     private SelenideElement loginButton = $(By.xpath("//button[@type='submit']"));
     private SelenideElement blogLabel = $(By.xpath("//a[text()='Blog']"));
     private SelenideElement errorMessage = $(By.xpath("//div[@class='alert alert-danger']"));
 
-
-    @Step("Login to the system")
-    public EntriesPage login(String email, String password) {
+    public LoginPage loginInputCredentials(String email, String password) {
         open(Urls.LOGIN_URL);
         userInput.sendKeys(email);
         passwordInput.sendKeys(password);
         loginButton.click();
+        return this;
+    }
+
+    @Step("Login to the system")
+    public EntriesPage successfulLogin() {
+
         try {
             Thread.sleep(6000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
         if (modalWindowLoginPage.isModalWindowDisplayed()) {
             modalWindowLoginPage.closeModalWindow();
         } else {
@@ -42,13 +44,8 @@ public class LoginPage {
         }
         return new EntriesPage();
     }
-
     @Step("Unsuccessful login with wrong password")
-    public LoginPage unsuccessfulLogin(String email, String password) {
-        open(Urls.LOGIN_URL);
-        userInput.sendKeys(email);
-        passwordInput.sendKeys(password);
-        loginButton.click();
+    public LoginPage unsuccessfulLogin() {
         errorMessage.shouldBe(Condition.enabled, Duration.ofSeconds(5));
         return this;
     }
@@ -65,5 +62,4 @@ public class LoginPage {
         return errorMessage.isDisplayed();
 
     }
-
 }

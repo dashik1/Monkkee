@@ -12,15 +12,13 @@ import static com.codeborne.selenide.Selenide.$;
 
 
 public class ModalWindowLoginPage {
-
     private SelenideElement modalWindow = $(By.xpath("//div[@class='modal-content']"));
     private SelenideElement cancelButton = $(By.xpath("//div[text()='Cancel']"));
 
     public boolean isModalWindowDisplayed() {
-        Configuration.timeout = 10000;
         return modalWindow.isDisplayed();
     }
-
+    
     @Step("Close modal window")
     public EntriesPage closeModalWindow() {
         cancelButton.shouldBe(Condition.enabled, Duration.ofSeconds(8));
