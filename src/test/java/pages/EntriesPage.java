@@ -1,10 +1,10 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import java.time.Duration;
@@ -12,8 +12,6 @@ import java.time.Duration;
 import static com.codeborne.selenide.Selenide.*;
 
 public class EntriesPage {
-
-
     private SelenideElement createEntryButton = $(By.id("create-entry"));
 
     private SelenideElement manageTagsButton = $(By.xpath("//a[text()='Manage tags']"));
@@ -30,30 +28,33 @@ public class EntriesPage {
         return createEntryButton.isEnabled();
     }
 
+    @Step("Create new entry")
     public NewEntryPage clickCreateEntryButton() {
         createEntryButton.click();
         return new NewEntryPage();
     }
 
 
-
+    @Step("Navigate to existing entry")
     public NewEntryPage navigateToEntry() {
         entriesTexts.get(1).click();
         return new NewEntryPage();
     }
 
+    @Step("Get number of entries")
     public int getNumberOfEntries() {
         entries.get(1).shouldBe(Condition.enabled, Duration.ofSeconds(10));
         return entries.size();
 
     }
 
-
+    @Step("Navigate to Manage Tags")
     public ManageTagsPage navigateToManageTags() {
         manageTagsButton.click();
         return new ManageTagsPage();
     }
 
+    @Step("Search for entries")
     public EntriesPage search(String searchWord) {
         searchInput.sendKeys(searchWord);
         searchButton.click();

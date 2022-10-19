@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import utilits.FakeMessageGenerator;
 
@@ -23,12 +24,12 @@ public class NewEntryPage {
     private SelenideElement deleteButton = $(By.id("delete-entry"));
 
 
+    @Step("Type new entry")
     public NewEntryPage typeNewEntry() {
         textBox.shouldBe(Condition.enabled, Duration.ofSeconds(3));
         entryInput.sendKeys(FakeMessageGenerator.generateNewEntry());
         savedLabel.shouldBe(Condition.enabled, Duration.ofSeconds(6));
         return this;
-
     }
 
     public EntriesPage goBackToEntriesPage() {
@@ -36,6 +37,7 @@ public class NewEntryPage {
         return new EntriesPage();
     }
 
+    @Step("Create new tag")
     public NewEntryPage createNewTag() {
         newTagInput.sendKeys(FakeMessageGenerator.generateWord());
         assignNewTagButton.click();
@@ -57,6 +59,7 @@ public class NewEntryPage {
     }
 
 
+    @Step("Delete entry")
     public EntriesPage deleteEntry() {
         backButton.shouldBe(Condition.enabled, Duration.ofSeconds(5));
         deleteButton.click();

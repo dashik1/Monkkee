@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import utilits.FakeMessageGenerator;
 
@@ -11,8 +12,7 @@ public class EditTagPage {
     private SelenideElement tagInput = $(By.id("tag"));
     private SelenideElement okButton = $(By.xpath("//button[@type='submit']"));
 
-
-
+    @Step("Edit tag")
     public EditTagPage editTagName() {
         tagInput.clear();
         tagInput.sendKeys(FakeMessageGenerator.generateWord());

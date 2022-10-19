@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import java.time.Duration;
@@ -16,19 +17,24 @@ public class ManageTagsPage {
     private ElementsCollection tagsNames = $$(By.xpath("//td[@class='tag ng-binding']"));
 
 
+    @Step("Click Edit tag button")
     public EditTagPage clickEditTagButton() {
         editTagButtons.get(1).click();
         return new EditTagPage();
     }
+
+    @Step("Get tag name")
     public String getTagName() {
         return tagsNames.get(1).getText();
     }
 
+    @Step("Get number of tags")
     public int getNumberOfTags() {
         tagsNames.get(1).shouldBe(Condition.enabled, Duration.ofSeconds(5));
         return tagsNames.size();
     }
 
+    @Step("Click Delete tag button")
     public ManageTagsPage clickDeleteTagButton() {
         deleteTagButtons.get(1).click();
         return this;
@@ -38,8 +44,6 @@ public class ManageTagsPage {
         switchTo().alert(Duration.ofSeconds(5)).accept();
         return this;
     }
-
-
 
 
 }

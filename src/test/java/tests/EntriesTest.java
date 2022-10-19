@@ -9,6 +9,7 @@ import pages.LoginPage;
 import pages.NewEntryPage;
 import utilits.FakeMessageGenerator;
 import utilits.RetryAnalyzer;
+
 @Log4j
 
 public class EntriesTest extends BaseTest {
@@ -17,7 +18,7 @@ public class EntriesTest extends BaseTest {
     EntriesPage entriesPage = new EntriesPage();
     NewEntryPage newEntryPage = new NewEntryPage();
 
-    @Test //(retryAnalyzer = RetryAnalyzer.class, priority = 1, description = "User created new entry")
+    @Test(retryAnalyzer = RetryAnalyzer.class, priority = 1, description = "User created new entry")
     public void createNewEntryTest() {
         int numberOfEntriesBeforeCreation = loginPage.login(Credentials.EMAIL, Credentials.PASSWORD)
                 .getNumberOfEntries();
@@ -29,10 +30,9 @@ public class EntriesTest extends BaseTest {
         int numberOfEntriesAfterCreation = entriesPage.getNumberOfEntries();
         log.info(String.format("Get number of entries after creation: %s", numberOfEntriesAfterCreation));
         Assert.assertTrue(numberOfEntriesAfterCreation == numberOfEntriesBeforeCreation + 1, "New entry is not created!");
-
     }
 
-    @Test //(retryAnalyzer = RetryAnalyzer.class, priority = 2, description = "User edits existing entry")
+    @Test(retryAnalyzer = RetryAnalyzer.class, priority = 2, description = "User edits existing entry")
     public void editEntryTest() {
         String entryTextBeforeEdit = loginPage.login(Credentials.EMAIL, Credentials.PASSWORD)
                 .navigateToEntry()
@@ -44,14 +44,12 @@ public class EntriesTest extends BaseTest {
                 .getEntryText();
         log.info(String.format("Get Entry text after editing: %s", entryTextAfterEdit));
         Assert.assertNotEquals(entryTextBeforeEdit, entryTextAfterEdit);
-
     }
 
-
-    @Test //(retryAnalyzer = RetryAnalyzer.class, priority = 1, description = "User deletes entry")
+    @Test(retryAnalyzer = RetryAnalyzer.class, priority = 1, description = "User deletes entry")
     public void deleteEntryTest() {
         int numberOfEntriesBeforeDeletion = loginPage.login(Credentials.EMAIL, Credentials.PASSWORD)
-               .getNumberOfEntries();
+                .getNumberOfEntries();
         log.info(String.format("Get number of entries before deletion: %s", numberOfEntriesBeforeDeletion));
         int numberOfEntriesAfterDeletion = entriesPage.navigateToEntry()
                 .deleteEntry()
@@ -60,7 +58,7 @@ public class EntriesTest extends BaseTest {
         Assert.assertTrue(numberOfEntriesAfterDeletion == numberOfEntriesBeforeDeletion - 1, "Entry is not deleted!");
     }
 
-    @Test //(retryAnalyzer = RetryAnalyzer.class, priority = 2, description = "User search for entry")
+    @Test(retryAnalyzer = RetryAnalyzer.class, priority = 2, description = "User search for entry")
     public void searchEntryTest() {
         boolean isSearchResultDisplayed = loginPage.login(Credentials.EMAIL, Credentials.PASSWORD)
                 .search(FakeMessageGenerator.generateWord())
